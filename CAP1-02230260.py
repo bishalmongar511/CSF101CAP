@@ -11,36 +11,25 @@
 #https://www.w3schools.com/python/python_for_loops.asp
 ################################
 # SOLUTION
-# Your Solution Score: 50054
+# Your Solution Score: 49894
 # Put your number here : 0
 ################################
 # Read the input.txt file
 def read_input():
-    f = open('input_0_cap1.txt', 'r')
-    print(f.read())
-    f.close()
+   with open('input_0_cap1.txt', 'r') as my_file:
+        for line in my_file:
+            yield line.strip()
 
-   
-def calculate_score():
-    f = open('input_0_cap1.txt', 'r')
-    read_file = f.read()
-    marks =0
-    for i in read_file:
-        if i =="A":
-            marks += 1
-        elif i == "B":
-            marks += 2
-        elif i=="C":
-            marks += 3
-        elif i == "X":
-            marks += 0
-        elif i == "Y":
-            marks += 3
-        elif i == "Z":
-            marks += 6
+def calculate_score(lines):
+    score = {'A X': 3, 'A Y': 4, 'A Z': 8, 'B X': 1, 'B Y': 5, 'B Z': 9, 'C X': 2, 'C Y': 6, 'C Z': 7}
+    total_score = 0
+    for line in lines:
+        key = line.strip()
+        value_in_dict = score.get(key, None)
+        if value_in_dict is not None:
+            total_score += value_in_dict
+    print("The total score is:", total_score)
 
-    print("The total marks is ", marks)
 
-read_input()
-calculate_score()
+calculate_score(read_input())
 
